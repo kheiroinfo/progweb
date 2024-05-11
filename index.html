@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3</title>
+    <style>
+        body {
+            background-color:#f5f5dc ;
+        }
+
+        h1 {
+            background-color: aqua;
+
+            color: orange;
+            text-align: center;
+
+        }
+
+        .h3 {
+            color: navy;
+
+        }
+
+        .tablexterne {
+            border: 3px solid blue;
+            padding: 2px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 800px;
+
+        }
+
+        #tableinterne {
+            display: block;
+            border: 3px solid blue;
+            width: 100%;
+            padding: 5px;
+
+
+
+        }
+
+        #td1 {
+            width: 40%;
+            padding: 5px;
+            text-align: right;
+            left: 50%;
+        }
+
+        #td2 {
+            width: 10%;
+            padding: 5px;
+            text-align: center;
+        }
+
+        #td3 {
+            padding-left: 10%;
+
+        }
+
+        td {
+
+            padding: 20px;
+
+        }
+        .button{
+
+        background-color: white;
+
+        }
+        .button:hover{
+
+        background-color: wheat;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>« Fiche de vœux »</h1>
+    <table class="tablexterne">
+        <tr>
+            <td>
+
+                <form action="reponse.php" method="post">
+
+                    <table id="tableinterne">
+                        <tr>
+                            <td id="td1" class="h3">Nom</td>
+                            <td id="td2"> : </td>
+                            <td id="td3"><input type="text" name="nom" placeholder="Votre Nom" required></td>
+                        </tr>
+                        <tr>
+                            <td id="td1" class="h3">Prénom</td>
+                            <td id="td2"> : </td>
+                            <td id="td3"><input type="text" name="prenom" placeholder="Votre Prenom" required></td>
+                        </tr>
+                        <tr>
+                            <td id="td1" class="h3">Date de naissance</td>
+                            <td id="td2">:</td>
+                            <td id="td3"><input type="date" name="date_naissance" required></td>
+                        </tr>
+                        <tr>
+                            <td id="td1" class="h3">N° de téléphone</td>
+                            <td id="td2"> : </td>
+                            <td id="td3"><input type="tel" name="telephone" placeholder="Votre N° de téléphone"
+                                    required></td>
+                        </tr>
+                        <tr>
+                            <td id="td1" class="h3">Adresse</td>
+                            <td id="td2">:</td>
+                            <td id="td3"><textarea name="adresse" placeholder="Votre Adresse" required></textarea></td>
+                        </tr>
+                        <tr>
+                            <td id="td1" class="h3">Genre</td>
+                            <td id="td2"> : </td>
+                            <td id="td3">
+                                <input type="radio" name="genre" value="masculin" required> Masculin
+                                <input type="radio" name="genre" value="feminin" required> Féminin
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="td1" class="h3">Civilité</td>
+                            <td id="td2"> : </td>
+                            <td id="td3">
+                                <input type="radio" name="civilite" value="Marié"> Marié
+                                <input type="radio" name="civilite" value="Célibataire" checked> Célibataire
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="td1" class="h3">Domaine d'études</td>
+                            <td id="td2"> : </td>
+                            <td id="td3">
+                                <select name="domaine_etudes[]" multiple required>
+                                    <option value=""></option>
+                                    <option value="informatique">INFORMATIQUE</option>
+                                    <option value="PHARMACIE">PHARMACIE</option>
+                                    <option value="sciences_juridiques">SCIENCES JURIDIQUES</option>
+                                    <option value="sciences_technologiques">SCIENCES TECHNOLOGIQUES</option>
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="td1" class="h3">Langues souhaitées</td>
+                            <td id="td2">:</td>
+                            <td id="td3">
+                                <input type="checkbox" name="langues[]" value="francais" checked> Français
+                                <input type="checkbox" name="langues[]" value="arabe"> Arabe
+                                <input type="checkbox" name="langues[]" value="anglais"> Anglais
+                                <input type="checkbox" name="langues[]" value="aucune_preference"> Aucune
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td id="td1" class="h3">Lettre de motivation</td>
+                            <td id="td2">:</td>
+                            <td id="td3"><input type="file" name="lettre_motivation" required></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: center;">
+                                <input class="button" type="submit" value="Sauvegarder">
+                                <input class="button" type="reset" value="Annuler">
+                            </td>
+                        </tr>
+
+
+                    </table>
+
+
+
+
+
+
+
+                </form>
+
+
+
+            </td>
+        </tr>
+
+    </table>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var aucuneLangueCheckbox = document.querySelector('input[value="aucune_preference"]');
+            var autresLanguesCheckboxes = document.querySelectorAll('input[name="langues[]"]:not([value="aucune_preference"])');
+    
+            // Fonction pour activer ou désactiver les autres cases à cocher en fonction de la case à cocher "Aucune"
+            function toggleAutresLanguesCheckboxes() {
+                autresLanguesCheckboxes.forEach(function (checkbox) {
+                    checkbox.disabled = aucuneLangueCheckbox.checked;
+                    if (aucuneLangueCheckbox.checked) {
+                       
+                        checkbox.checked = false;
+                    }
+                });
+            }
+    
+            // Ajouter un gestionnaire d'événements pour la case à cocher "Aucune"
+            aucuneLangueCheckbox.addEventListener('change', toggleAutresLanguesCheckboxes);
+    
+            // Appeler la fonction pour la première fois pour s'assurer que l'état initial est correct
+            toggleAutresLanguesCheckboxes();
+        });
+    </script>
+    
+</body>
+
+</html>
